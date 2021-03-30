@@ -1,0 +1,25 @@
+Chart APIs Description
+
+This set of API’s is designed to provide the data for the Charts module in AlphaX. The data will be returned for one network ID and Channel ID. If more than one network ID and channel ID combination is required then the API must be returned multiple times.
+
+There are 3 API’s that each have a slight difference in variables that can be embedded into the call API for fast and easy data transfer.
+
+Each of the outputs are similar in nature with the correct label and value attached, ready to insert into the chart.
+
+RAW Data
+
+Endpoint: https://dev.alphax.cloud/template/ajax/chart.raw.php?id={network id}&ch={channel id}
+
+Output: [{“value”: int, “timestamp”: int}...]
+
+Group By Data
+
+Endpoint: https://dev.alphax.cloud/template/ajax/chart.group.php?id={network id}&ch={channel id}&agr={sum | avg}&group={year | month | week | dayOfWeek | hour}
+
+Output: [{“year”: int, “month”: int(1 to 12) | NULL, “week”: int(0 to 53) | NULL, “dayOfWeek”: int(1 to 7) | NULL, “dayOfMonth”: int(1 to 31) | NULL, “hour”: int(0 to 23) | NULL, “value”: int}...]
+
+Aggregate By Data
+
+Endpoint: https://dev.alphax.cloud/template/ajax/chart.aggregate.php?id={network id}&ch={channel id}&agr={sum | avg}&group={year | month | week | dayOfMonth | dayOfWeek | dayOfYear | hour}
+
+Output: [{“value”: int, “${group}”: int(month 1 to 12, week 0 to 53, dayOfMonth 1 to 31, dayOfWeek 1 to 7, dayOfYear 1 to 366, hour 0 to 23)}...]
