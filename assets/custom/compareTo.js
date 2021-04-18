@@ -1,21 +1,20 @@
 // Compare to chart
 jQuery("#addChart").click(function() {
-    // const URL = 'https://dev.alphax.cloud/template/ajax/get.sensors.php';
-	// 	fetch(URL, {
-    //             mode: 'cors',
-    //             method: 'POST',
-    //             headers: {
-    //                 'Content-Type': 'application/x-www-form-urlencoded',
-    //                 'Content-Type': 'application/json',
-    //                 'Accept': 'application/json',
-    //                 'Access-Control-Allow-Origin': '*',
-    //                 'Access-Control-Allow-Credentials': 'true',
-    //                 'Access-Control-Allow-Headers': 'X-Requested-With',
-    //             },
-    //         })
-    //         .then(response => response.json())
-    //         .then(response => {
-                var response = [{"id":"5a8fa5b2d84e7e5ae30f0b94","channelID":"1","channelDescription":"JFN303 Motor DE","siteName":"Eastlink","tag":"JFN303","networkID":"240ac4027660"},{"id":"5a8fa5b2d84e7e5ae30f0b94","channelID":"2","channelDescription":"JFN303 Motor NDE","siteName":"Eastlink","tag":"JFN303","networkID":"240ac4027660"},{"id":"5a8fa5b2d84e7e5ae30f0b94","channelID":255,"channelDescription":"Battery Voltage","siteName":"Eastlink","tag":"JFN303","networkID":"240ac4027660"},{"id":"5a8fa5b2d84e7e5ae30f0b94","channelID":254,"channelDescription":"Signal Strength RSSI","siteName":"Eastlink","tag":"JFN303","networkID":"240ac4027660"},{"id":"5a8fa5b2d84e7e5ae30f0b94","channelID":252,"channelDescription":"Error Code","siteName":"Eastlink","tag":"JFN303","networkID":"240ac4027660"},{"id":"5ab35d92325899eed523d6b2","channelID":"1","channelDescription":"B2-BMGBIV","siteName":"Sibelco, Pasir Gudang, Johor, Malaysia","tag":"SPM001","networkID":"4D52FB"},{"id":"5ab35d92325899eed523d6b2","channelID":"2","channelDescription":"B2-BMGBIH","siteName":"Sibelco, Pasir Gudang, Johor, Malaysia","tag":"SPM001","networkID":"4D52FB"},{"id":"5ab35d92325899eed523d6b2","channelID":255,"channelDescription":"Battery Voltage","siteName":"Sibelco, Pasir Gudang, Johor, Malaysia","tag":"SPM001","networkID":"4D52FB"},{"id":"5ab35d92325899eed523d6b2","channelID":254,"channelDescription":"Signal Strength RSSI","siteName":"Sibelco, Pasir Gudang, Johor, Malaysia","tag":"SPM001","networkID":"4D52FB"},{"id":"5ab35d92325899eed523d6b2","channelID":252,"channelDescription":"Error Code","siteName":"Sibelco, Pasir Gudang, Johor, Malaysia","tag":"SPM001","networkID":"4D52FB"},{"id":"5ab364c5325899f31032bdd2","channelID":"1","channelDescription":"B2-BMPBOV","siteName":"Sibelco, Pasir Gudang, Johor, Malaysia","tag":"SPM002","networkID":"4D5301"},{"id":"5ab364c5325899f31032bdd2","channelID":"2","channelDescription":"B2-BMPBOH","siteName":"Sibelco, Pasir Gudang, Johor, Malaysia","tag":"SPM002","networkID":"4D5301"},{"id":"5ab364c5325899f31032bdd2","channelID":"3","channelDescription":"B2-BMPBIV","siteName":"Sibelco, Pasir Gudang, Johor, Malaysia","tag":"SPM002","networkID":"4D5301"},{"id":"5ab364c5325899f31032bdd2","channelID":"4","channelDescription":"B2-BMPBIH","siteName":"Sibelco, Pasir Gudang, Johor, Malaysia","tag":"SPM002","networkID":"4D5301"},{"id":"5ab364c5325899f31032bdd2","channelID":255,"channelDescription":"Battery Voltage","siteName":"Sibelco, Pasir Gudang, Johor, Malaysia","tag":"SPM002","networkID":"4D5301"}]; 
+    const URL = 'https://dev.alphax.cloud/template/ajax/get.sensors.php';
+		fetch(URL, {
+                mode: 'cors',
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Credentials': 'true',
+                    'Access-Control-Allow-Headers': 'X-Requested-With',
+                },
+            })
+            .then(response => response.json())
+            .then(response => {
                 var data = [];
                 for (let index = 0; index < response.length; index++) {
 					const element = response[index];
@@ -28,8 +27,8 @@ jQuery("#addChart").click(function() {
                 var x = $('.chartData').length;
                 var component = compareTo(x, data);
                 $("#chart"+x).after(component);
-			// })
-            // .catch(error =>console.log('Response failed : ' + error.message));
+			})
+            .catch(error => console.log('Response failed : ' + error.message));
     
 });
 function compareTo(x, dataset) {

@@ -1,0 +1,102 @@
+<html>
+<head>
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-ui.min.js"></script>
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-exports.min.js"></script>
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-stock.min.js"></script>
+  <script src="https://cdn.anychart.com/releases/v8/js/anychart-data-adapter.min.js"></script>
+  <link href="https://cdn.anychart.com/releases/v8/css/anychart-ui.min.css" type="text/css" rel="stylesheet">
+  <link href="https://cdn.anychart.com/releases/v8/fonts/css/anychart-font.min.css" type="text/css" rel="stylesheet">
+  <style type="text/css">
+
+    html,
+    body,
+    #container {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+  
+</style>
+</head>
+<body>
+  
+  <div id="container"></div>
+  
+
+  <script>
+
+    anychart.onDocumentReady(function () {
+      // The data used in this sample can be obtained from the CDN
+      // https://cdn.anychart.com/csv-data/weather-data.csv
+      anychart.data.loadCsvFile(
+        'https://cdn.anychart.com/csv-data/weather-data.csv',
+        function (data) {
+          console.log(typeof data);
+          // create data table on loaded data
+          var dataTable = anychart.data.table();
+          dataTable.addData(data);
+
+          // map loaded data
+          var dpMaxTempMapping = dataTable.mapAs({ value: 2 });
+          var dpMinTempMapping = dataTable.mapAs({ value: 3 });
+          var scrollerMapping = dataTable.mapAs({ value: 4 });
+          var dpTotalRainMapping = dataTable.mapAs({ value: 6 });
+          var dpSpdOfMaxGustMapping = dataTable.mapAs({ value: 10 });
+
+          // create stock chart
+          var chart = anychart.stock();
+
+          // create temperature plot on the chart
+          var temperaturePlot = chart.plot(0);
+
+          // create temperature plot series with mapped data
+          temperaturePlot.line(dpMaxTempMapping).name('Max. Temperature');
+          temperaturePlot.line(dpMinTempMapping).name('Min. Temperature');
+          temperaturePlot.yGrid(true).yMinorGrid(true);
+
+          // create DP Total temperature plot on the chart with column series
+          var dpTotalRainPlot = chart.plot(1);
+          dpTotalRainPlot.height('20%');
+          dpTotalRainPlot
+            .column()
+            .name('Total Rain')
+            .data(dpTotalRainMapping)
+            .fill('#ef6c00');
+
+          // create dpSpdOfMaxGust temperature plot on the chart with column series
+          var dpSpdOfMaxGustPlot = chart.plot(2);
+          dpSpdOfMaxGustPlot.height('20%');
+          dpSpdOfMaxGustPlot
+            .column()
+            .name('Max Gust')
+            .data(dpSpdOfMaxGustMapping)
+            .fill('#ffd54f');
+
+          // create scroller series with mapped data
+          chart.scroller().line(scrollerMapping);
+          // set chart selected date/time range
+          chart.selectRange('2008-04-01', '2008-09-28');
+          // set container id for the chart
+          chart.container('container');
+          // initiate chart drawing
+          chart.draw();
+
+          // create range picker
+          var rangePicker = anychart.ui.rangePicker();
+          // init range picker
+          rangePicker.render(chart);
+
+          // create range selector
+          var rangeSelector = anychart.ui.rangeSelector();
+          // init range selector
+          rangeSelector.render(chart);
+        }
+      );
+    });
+  
+</script>
+</body>
+</html>
+               
