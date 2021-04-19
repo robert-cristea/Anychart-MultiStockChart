@@ -198,8 +198,6 @@ jQuery("#drawChart").click(function () {
         }
     });
 
-
-
 });
 
 $("#import").click(function () {
@@ -222,12 +220,9 @@ $("#import").click(function () {
         plot.column(columnMapping);
         plot.line(lineMapping);
         plot.marker(scatterMapping);
-        chart.container('chart_3');
+        chart.container('chart_2');
         chart.draw();
-        // $("#annotation_load").click(function () {
-            load(plot);
-        // })
-
+        load(plot);
     });
 
 });

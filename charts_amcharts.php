@@ -507,7 +507,7 @@ License: You must have a valid license purchased only from themeforest(the above
 											</tr>
 										</table>
 										<div id="chart_2" class="chart" style="height: 90vh;"></div>
-										<div id="chart_3" class="chart" style="height: 90vh;"></div>
+										<!-- <div id="chart_3" class="chart" style="height: 90vh;"></div> -->
 									</div>
 									<!-- END CHART PORTLET-->
 								</div>
