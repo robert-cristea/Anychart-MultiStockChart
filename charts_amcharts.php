@@ -118,8 +118,7 @@ License: You must have a valid license purchased only from themeforest(the above
 						</a>
 						<button type="button" class="btn red" id="export">Export</button>
 						<button type="button" class="btn green" id="import">Import</button>
-						<button type="button" class="btn green" id="annotation_load">Annotation Load</button>
-
+						<!-- <button type="button" class="btn green" id="annotation_load">Annotation Load</button> -->
 					</div>
 				</div>
 				<!-- END PAGE TITLE -->

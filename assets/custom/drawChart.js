@@ -92,7 +92,8 @@ jQuery("#drawChart").click(function () {
     chart.draw();
 
 
-    $("#export").click(function () {
+    $("#export").click(function (e) {
+        // e.preventDefault();
         save();
         chart.saveAsCsv();
         $("#chart_2").empty();
@@ -107,11 +108,24 @@ jQuery("#drawChart").click(function () {
         /* here a variable for saving annotations is used,
         but you can save them to a database, local storage, or server*/
         annotationsAtServer = data;
+        download(annotationsAtServer, 'annotation.json', 'text/plain');
     }
 
     // save annotations
     function save() {
         sendAnnotationsToServer(plot.annotations().toJson(true));
+    }
+
+    function download(content, fileName, contentType) {
+
+        var a = document.createElement("a");
+        var file = new Blob([content], { type: contentType });
+
+        a.href = URL.createObjectURL(file);
+
+        a.download = fileName;
+        a.click();
+        URL.revokeObjectURL(file);
     }
 
     // add annotation items in context menu
@@ -210,10 +224,10 @@ $("#import").click(function () {
         plot.marker(scatterMapping);
         chart.container('chart_3');
         chart.draw();
-        $("#annotation_load").click(function () {
+        // $("#annotation_load").click(function () {
             load(plot);
-        })
-        
+        // })
+
     });
 
 });
@@ -788,7 +802,18 @@ function normalizeFontSettings(val) {
 function getAnnotationsFromServer() {
     /* here a variable for load annotations is used,
     but you can load them from a database, local storage, or server*/
-    return annotationsAtServer;
+
+    var json = null;
+    $.ajax({
+        'async': false,
+        'global': false,
+        'url': "/annotation.json",
+        'dataType': "json",
+        'success': function (data) {
+            json = data;
+        }
+    });
+    return json;
 }
 
 // load all saved annotations
